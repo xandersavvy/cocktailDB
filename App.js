@@ -1,20 +1,78 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import { scale } from "react-native-size-matters";
+import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import fetchCocktail from "./fetchCocktail.service";
+import CockTailPreview from "./CockTailPreview";
 
-export default function App() {
+const App = () => {
+  let arr = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+  const [data, setData] = useState([]);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ScrollView style={styles.outContainer}>
+      <View style={styles.container}>
+        <Button
+          onPress={() =>
+            fetchCocktail(arr[Math.floor(Math.random() * 26)]).then((res) =>
+              setData(res)
+            )
+          }
+          title="fetch cocktail list"
+        />
+      </View>
+      {data !== [] &&
+        data.map((item, index) => (
+          <CockTailPreview
+            key={index}
+            strDrink={item.strDrink}
+            strCategory={item.strCategory}
+            strDrinkThumb={item.strDrinkThumb}
+          />
+        ))}
+      {/* <Text>{JSON.stringify(data)}</Text> */}
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
+  outContainer: {
+    padding: scale(10),
+    top: scale(20),
+    flex: 4,
+    color: "black",
+    backgroundColor: "#fff",
+  },
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 2,
+    color: "black",
+    backgroundColor: "#fff",
   },
 });
+
+export default App;

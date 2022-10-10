@@ -6,7 +6,7 @@ const CockTailPreview = ({ strDrink, strCategory, strDrinkThumb }) => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: strDrinkThumb }} style={styles.imageStyle} />
-      <Text>{strDrink}</Text>
+      <Text style={styles.drinkName}>{strDrink}</Text>
       <Text>{strCategory}</Text>
       {/* <Text>
         Hello I am {firstName} {lastName}. I am from {city}. you can mail me at
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 200,
     height: 200,
+  },
+  drinkName: {
+    fontSize: 20,
+    fontWeight: "900",
   },
 });
 
